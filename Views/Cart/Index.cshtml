@@ -1,0 +1,45 @@
+﻿@model CartViewModel
+
+<h2>Din kundvagn</h2>
+<h4>Här är de frön du lagt till i din kundvagn.</h4>
+
+<form method="post" asp-action="PlaceOrder">
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Antal valda</th>
+                <th>Frö</th>
+                <th class="text-right">Pris</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.Seeds.Count; i++)
+            {
+                <tr>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => modelItem.Seeds[i].Amount)
+                        @Html.HiddenFor(modelItem => modelItem.Seeds[i].Amount)
+                    </td>
+                    <td class="text-left">
+                        @Html.DisplayFor(modelItem => modelItem.Seeds[i].Seed.Name)
+                        @Html.HiddenFor(modelItem => modelItem.Seeds[i].Seed.Name)
+                    </td>
+                    <td class="text-right">
+                        @Html.DisplayFor(modelItem => modelItem.Seeds[i].Seed.Price)
+                        @Html.HiddenFor(modelItem => modelItem.Seeds[i].Seed.Price)
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3" class="text-right">Totalsumma:</td>
+                <td class="text-right">
+                    @Model.CartTotal SEK
+                    <input type="submit" class="float-right btn btn-success" value="Beställ" />
+                </td>
+            </tr>
+        </tfoot>
+        @Html.HiddenFor(modelItem => modelItem.CartTotal)
+    </table>
+</form>

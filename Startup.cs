@@ -12,6 +12,7 @@ using PlanteraMera_v2.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using PlanteraMera_v2.Services;
 
 namespace PlanteraMera_v2
 {
@@ -32,6 +33,9 @@ namespace PlanteraMera_v2
                     Configuration.GetConnectionString("PlanteraConnectionString")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddScoped<ISeedService, MockSeedService>();
+            
             services.AddControllersWithViews();
             services.AddRazorPages();
         }
