@@ -23,6 +23,10 @@ namespace PlanteraMera_v2.Models
 
     public class OrderRow
     {
+        public OrderRow()
+        {
+
+        }
         public OrderRow(CartItem cartItem)
         {
             Amount = cartItem.Amount;

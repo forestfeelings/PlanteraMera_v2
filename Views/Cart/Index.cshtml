@@ -35,11 +35,11 @@
             <tr>
                 <td colspan="3" class="text-right">Totalsumma:</td>
                 <td class="text-right">
-                    @Model.CartTotal SEK
-                    <input type="submit" class="float-right btn btn-success" value="Beställ" />
+                    @Model.TotalPrice SEK
                 </td>
+                <td><input type="submit" class="float-right btn btn-success" value="Beställ" /></td>
             </tr>
         </tfoot>
-        @Html.HiddenFor(modelItem => modelItem.CartTotal)
+        @Html.HiddenFor(modelItem => modelItem.TotalPrice)
     </table>
 </form>

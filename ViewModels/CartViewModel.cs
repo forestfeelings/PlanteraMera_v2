@@ -9,7 +9,7 @@ namespace PlanteraMera_v2.ViewModels
 {
     public class CartViewModel
     {
-        public decimal CartTotal { get; set; }
+        public decimal TotalPrice { get; set; }
         public List<CartItem> Seeds { get; set; }
     }
 
