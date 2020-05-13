@@ -25,7 +25,6 @@ namespace PlanteraMera_v2.Models
     {
         public OrderRow()
         {
-
         }
         public OrderRow(CartItem cartItem)
         {

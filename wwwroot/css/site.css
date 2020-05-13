@@ -69,3 +69,27 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+/* Global styles */
+
+@font-face {
+    font-family: 'roboto-regular';
+    src: url('../fonts/roboto-regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'yesevaone-regular';
+    src: url('../fonts/yesevaone-regular.ttf') format('truetype');
+}
+
+body {
+    font-family: roboto-regular;
+}
+
+h1, h2, h3, h4 {
+    font-family: yesevaone-regular;
+}
+
+.bg-navbar {
+    background-color: #B8B42D;
+}

@@ -11,6 +11,8 @@ namespace PlanteraMera_v2.Services
     {
         private List<Seed> seeds = new List<Seed>();
 
+        /* Fyller appen med mockdata */
+
         public MockSeedService()
         {
             IEnumerable<Seed> allSeeds = new List<Seed>

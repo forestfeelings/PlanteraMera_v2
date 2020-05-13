@@ -1,0 +1,9 @@
+﻿.seed-image {
+    height: 150px;
+    width: 150px;
+    overflow: hidden;
+}
+
+.seed-image img {
+    width: 100%;
+}

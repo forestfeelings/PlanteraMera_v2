@@ -33,7 +33,7 @@ namespace PlanteraMera_v2
 
             services.AddSession(options =>
             {
-                options.IdleTimeout = TimeSpan.FromSeconds(100);
+                options.IdleTimeout = TimeSpan.FromSeconds(10);
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });

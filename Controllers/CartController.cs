@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PlanteraMera_v2.Models;
@@ -8,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace PlanteraMera_v2.Controllers
@@ -18,6 +20,7 @@ namespace PlanteraMera_v2.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
 
         private const string sessionKeyCart = "_cart";
+        private const string sessionKeyUserId = "_userId";
 
         public CartController(ISeedService seedService, UserManager<ApplicationUser> userManager)
         {
@@ -25,21 +28,33 @@ namespace PlanteraMera_v2.Controllers
             _userManager = userManager;
         }
 
+        /* Kollar om sessionen är aktiv och om det finns varor tillagda i sessionen */
+
         public IActionResult Index()
         {
+            var cartUserId = HttpContext.Session.Get<Guid>(sessionKeyUserId);
+
+            CartViewModel vm = new CartViewModel();
+
+            if (cartUserId == null || cartUserId == Guid.Empty)
+            {
+                ViewBag.Message = "Sessionen har gått ut!";
+                return View(vm);
+            }
+
             var cart = HttpContext.Session.Get<List<CartItem>>(sessionKeyCart);
             var seeds = _seedService.GetAll();
 
-            CartViewModel vm = new CartViewModel();
             vm.Seeds = cart;
 
             vm.TotalPrice = vm.Seeds.Sum(s => s.Seed.Price * s.Amount);
-
+            
             return View(vm);
         }
 
-        [HttpPost]
+        /* Postar en order med information om varor och användare */
 
+        [HttpPost]
         public async Task<IActionResult> PlaceOrder([Bind("TotalPrice,Seeds")]CartViewModel cart)
         {
             OrderViewModel vm = new OrderViewModel();
@@ -60,6 +75,5 @@ namespace PlanteraMera_v2.Controllers
 
             return View("OrderSuccess", vm);
         }
-
     }
 }

@@ -5,18 +5,20 @@
 <div class="d-flex flex-row justify-content-around align-content-around flex-wrap">
     @foreach (var item in Model)
     {
-        <div class="card flex-grow-8 flex-shrink-1 m-1" style="flex-basis: 300px">
+        <div class="card flex-grow-0 flex-shrink-1 m-1" style="flex-basis: 300px">
             <img src="~/images/@(item.Type).jpg" alt="@item.Name" class="card-img-top" />
-            <div class="card-body">
-                <h3 class="card-title">@item.Name</h3>
-                <p class="card-text">@item.Description</p>
-                <p>
-                    @item.Price SEK
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        <span class="float-right">@Html.ActionLink("Köp", "AddToCart", "Seeds", new { id = item.SeedId }, new { @class = "btn btn-success" } )</span>
-                    }
-                </p>
+            <div class="caption">
+                <div class="card-body">
+                    <h3 class="fa-pull-right">@item.Price SEK</h3>
+                    <h3 class="card-title">@item.Name</h3>
+                    <p class="card-text">
+                        @item.Type
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <span class="float-right">@Html.ActionLink("Köp", "AddToCart", "Seeds", new { id = item.SeedId }, new { @class = "btn btn-success" })</span>
+                        }
+                    </p>
+                </div>
             </div>
         </div>
     }
