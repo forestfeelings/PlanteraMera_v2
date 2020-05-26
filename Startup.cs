@@ -31,6 +31,15 @@ namespace PlanteraMera_v2
         {
             services.AddDistributedMemoryCache();
 
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(
+                    builder =>
+                    {
+                        builder.WithOrigins("http://localhost:50725");
+                    });
+            });
+
             services.AddSession(options =>
             {
                 options.IdleTimeout = TimeSpan.FromSeconds(10);
@@ -67,6 +76,8 @@ namespace PlanteraMera_v2
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseCors();
 
             app.UseAuthentication();
             app.UseAuthorization();

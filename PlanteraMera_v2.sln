@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30002.166
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlanteraMera_v2", "PlanteraMera_v2.csproj", "{F18C5C49-8F1E-4E4A-BAE1-69D3569FA089}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlanteraMera_v2", "PlanteraMera_v2.csproj", "{F18C5C49-8F1E-4E4A-BAE1-69D3569FA089}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeedsService", "..\SeedsService\SeedsService.csproj", "{661F105C-AC9E-4DCE-9727-AD947AB4EB52}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeedsService.Tests", "..\SeedsService.Tests\SeedsService.Tests.csproj", "{7926A2A5-5A9E-4DDD-8902-4BD7EEBC5AAB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{F18C5C49-8F1E-4E4A-BAE1-69D3569FA089}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F18C5C49-8F1E-4E4A-BAE1-69D3569FA089}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F18C5C49-8F1E-4E4A-BAE1-69D3569FA089}.Release|Any CPU.Build.0 = Release|Any CPU
+		{661F105C-AC9E-4DCE-9727-AD947AB4EB52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{661F105C-AC9E-4DCE-9727-AD947AB4EB52}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{661F105C-AC9E-4DCE-9727-AD947AB4EB52}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{661F105C-AC9E-4DCE-9727-AD947AB4EB52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7926A2A5-5A9E-4DDD-8902-4BD7EEBC5AAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7926A2A5-5A9E-4DDD-8902-4BD7EEBC5AAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7926A2A5-5A9E-4DDD-8902-4BD7EEBC5AAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7926A2A5-5A9E-4DDD-8902-4BD7EEBC5AAB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -15,7 +15,8 @@
                         @item.Type
                         @if (User.Identity.IsAuthenticated)
                         {
-                            <span class="float-right">@Html.ActionLink("Köp", "AddToCart", "Seeds", new { id = item.SeedId }, new { @class = "btn btn-success" })</span>
+                            @*<span class="float-right">@Html.ActionLink("Köp", "AddToCart", "Seeds", new { id = item.SeedId }, new { @class = "btn btn-success" })</span>*@
+                            <span class="float-right"><button class="btn btn-success" onclick="AddToCart('@item.SeedId')">Köp</button></span>
                         }
                     </p>
                 </div>

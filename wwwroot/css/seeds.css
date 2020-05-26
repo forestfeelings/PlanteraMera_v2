@@ -1,4 +1,9 @@
-﻿.seed-image {
+﻿@font-face {
+    font-family: 'roboto-bold';
+    src: url('../fonts/roboto-bold.ttf') format('truetype');
+}
+
+.seed-image {
     height: 150px;
     width: 150px;
     overflow: hidden;
@@ -6,4 +11,8 @@
 
 .seed-image img {
     width: 100%;
+}
+
+#cart-amount {
+    font-family: roboto-bold
 }
