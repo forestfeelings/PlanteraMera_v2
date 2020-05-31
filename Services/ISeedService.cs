@@ -9,8 +9,8 @@ namespace PlanteraMera_v2.Services
 {
     public interface ISeedService
     {
-        IEnumerable<Seed> GetAll();
+        public Task<IEnumerable<Seed>> GetAll();
 
-        Seed GetSeedById(Guid id);
+        public Task<Seed> GetSeedById(Guid id);
     }
 }

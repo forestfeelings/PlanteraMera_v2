@@ -1,22 +1,22 @@
-﻿@model IEnumerable<Seed>
+﻿@model SeedViewModel
 
 <h1>Frön</h1>
 
 <div class="d-flex flex-row justify-content-around align-content-around flex-wrap">
-    @foreach (var item in Model)
+    @foreach (var item in Model.Seeds)
     {
         <div class="card flex-grow-0 flex-shrink-1 m-1" style="flex-basis: 300px">
             <img src="~/images/@(item.Type).jpg" alt="@item.Name" class="card-img-top" />
             <div class="caption">
                 <div class="card-body">
-                    <h3 class="fa-pull-right">@item.Price SEK</h3>
-                    <h3 class="card-title">@item.Name</h3>
+                    <h4 class="fa-pull-right">@item.Price SEK</h4>
+                    <h4 class="card-title"><a asp-controller="Seeds" asp-action="Details" asp-route-id="@item.SeedId">@item.Name</a></h4>
                     <p class="card-text">
                         @item.Type
                         @if (User.Identity.IsAuthenticated)
                         {
                             @*<span class="float-right">@Html.ActionLink("Köp", "AddToCart", "Seeds", new { id = item.SeedId }, new { @class = "btn btn-success" })</span>*@
-                            <span class="float-right"><button class="btn btn-success" onclick="AddToCart('@item.SeedId')">Köp</button></span>
+                            <span class="float-right"><button class="btn btn-success" onclick="AddToCart('@item.SeedId')">Lägg i kundvagn</button></span>
                         }
                     </p>
                 </div>

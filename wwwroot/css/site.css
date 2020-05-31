@@ -82,12 +82,21 @@ body {
     src: url('../fonts/yesevaone-regular.ttf') format('truetype');
 }
 
+@font-face {
+    font-family: 'roboto-italic';
+    src: url('../fonts/roboto-italic.ttf') format('truetype');
+}
+
 body {
     font-family: roboto-regular;
 }
 
 h1, h2, h3, h4 {
     font-family: yesevaone-regular;
+}
+
+.h5-italic {
+    font-family: roboto-italic;
 }
 
 .bg-navbar {

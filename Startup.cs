@@ -42,7 +42,7 @@ namespace PlanteraMera_v2
 
             services.AddSession(options =>
             {
-                options.IdleTimeout = TimeSpan.FromSeconds(10);
+                options.IdleTimeout = TimeSpan.FromSeconds(60);
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });
@@ -53,9 +53,11 @@ namespace PlanteraMera_v2
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            services.AddControllersWithViews();
+            services.AddControllersWithViews()
+                .AddControllersAsServices();
             services.AddRazorPages();
-            services.AddSingleton<ISeedService, MockSeedService>();
+            services.AddHttpClient();
+            services.AddTransient<ISeedService, SeedService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

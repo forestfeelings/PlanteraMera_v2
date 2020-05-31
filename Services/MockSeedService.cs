@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PlanteraMera_v2.Services
 {
-    public class MockSeedService : ISeedService
+    public class MockSeedService
     {
         private List<Seed> seeds = new List<Seed>();
 

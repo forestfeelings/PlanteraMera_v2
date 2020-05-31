@@ -28,60 +28,77 @@ namespace PlanteraMera_v2.Controllers
             _userManager = userManager;
         }
 
-        public IActionResult Index()
+        [HttpGet]
+        public async Task<IActionResult> Index()
         {
-            var seeds = _seedService.GetAll();
+            var seeds = await _seedService.GetAll();
 
-            return View(seeds);
+            var vm = new SeedViewModel()
+            {
+                Seeds = seeds.ToList()
+            };
+
+            return View(vm);
+        }
+
+        [HttpGet("id")]
+        //[Route("/Seeds/Details", Name = "Details")]
+        public async Task<IActionResult> Details(Guid id)
+        {
+            var seed = await _seedService.GetSeedById(id);
+            if (seed == null)
+                return NotFound();
+            else
+                return View(seed);
         }
 
         /* Skickar de klickade varorna till sessions efter authorisation av inloggad användare */
 
-        [Authorize]
-        public IActionResult AddToCart(Guid id)
-        {
-            var currentCartItems = HttpContext.Session.Get<List<CartItem>>(sessionKeyCart);
-            var sessionUserId = HttpContext.Session.Get<Guid>(sessionKeyUserId);
-            var actualUserId = Guid.Parse(_userManager.GetUserId(User));
+        //[Authorize]
+        //public IActionResult AddToCart(Guid id)
+        //{
+        //    var currentCartItems = HttpContext.Session.Get<List<CartItem>>(sessionKeyCart);
+        //    var sessionUserId = HttpContext.Session.Get<Guid>(sessionKeyUserId);
+        //    var actualUserId = Guid.Parse(_userManager.GetUserId(User));
 
-            List<CartItem> cartItems = new List<CartItem>();
+        //    List<CartItem> cartItems = new List<CartItem>();
 
-            if (currentCartItems != null)
-            {
-                cartItems = currentCartItems;
+        //    if (currentCartItems != null)
+        //    {
+        //        cartItems = currentCartItems;
 
-                if (sessionUserId != actualUserId)
-                {
-                    currentCartItems = null;
-                    HttpContext.Session.Clear();
-                    cartItems = new List<CartItem>();
-                }
-            }
+        //        if (sessionUserId != actualUserId)
+        //        {
+        //            currentCartItems = null;
+        //            HttpContext.Session.Clear();
+        //            cartItems = new List<CartItem>();
+        //        }
+        //    }
 
-            HttpContext.Session.Set<Guid>(sessionKeyUserId, actualUserId);
+        //    HttpContext.Session.Set<Guid>(sessionKeyUserId, actualUserId);
 
-            if (currentCartItems != null && currentCartItems.Any(x => x.Seed.SeedId == id))
-            {
-                int seedIndex = currentCartItems.FindIndex(x => x.Seed.SeedId == id);
-                currentCartItems[seedIndex].Amount += 1;
-                cartItems = currentCartItems;
-            }
-            else
-            {
-                var seed = _seedService.GetSeedById(id);
-                CartItem newItem = new CartItem()
-                {
-                    Seed = seed,
-                    Amount = 1
-                };
+        //    if (currentCartItems != null && currentCartItems.Any(x => x.Seed.SeedId == id))
+        //    {
+        //        int seedIndex = currentCartItems.FindIndex(x => x.Seed.SeedId == id);
+        //        currentCartItems[seedIndex].Amount += 1;
+        //        cartItems = currentCartItems;
+        //    }
+        //    else
+        //    {
+        //        var seed = _seedService.GetSeedById(id);
+        //        CartItem newItem = new CartItem()
+        //        {
+        //            Seed = seed,
+        //            Amount = 1
+        //        };
 
-                cartItems.Add(newItem);
-            }
+        //        cartItems.Add(newItem);
+        //    }
 
-            HttpContext.Session.Set<List<CartItem>>(sessionKeyCart, cartItems);
+        //    HttpContext.Session.Set<List<CartItem>>(sessionKeyCart, cartItems);
 
-            return RedirectToAction("Index");
-        }
+        //    return RedirectToAction("Index");
+        //}
     }
 }
 

@@ -27,7 +27,7 @@ namespace PlanteraMera_v2.Controllers
 
         /* Kollar om sessionen är aktiv och om det finns varor tillagda i sessionen */
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             var cartUserId = HttpContext.Session.Get<Guid>(sessionKeyUserId);
 
@@ -40,12 +40,12 @@ namespace PlanteraMera_v2.Controllers
             }
 
             var cart = HttpContext.Session.Get<List<CartItem>>(sessionKeyCart);
-            var seeds = _seedService.GetAll();
+            var seeds = await _seedService.GetAll();
 
             vm.Seeds = cart;
 
             vm.TotalPrice = vm.Seeds.Sum(s => s.Seed.Price * s.Amount);
-            
+
             return View(vm);
         }
 

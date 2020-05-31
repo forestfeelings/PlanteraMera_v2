@@ -48,7 +48,7 @@ namespace PlanteraMera_v2.Api
 
         [HttpGet]
 
-        public IActionResult AddToCart(Guid id)
+        public async Task<IActionResult> AddToCart(Guid id)
         {
             var currentCartItems = HttpContext.Session.Get<List<CartItem>>(sessionKeyCart);
             var sessionUserId = HttpContext.Session.Get<Guid>(sessionKeyUserId);
@@ -78,7 +78,7 @@ namespace PlanteraMera_v2.Api
             }
             else
             {
-                var seed = _seedService.GetSeedById(id);
+                var seed = await _seedService.GetSeedById(id);
                 CartItem newItem = new CartItem()
                 {
                     Seed = seed,

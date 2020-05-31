@@ -1,0 +1,24 @@
+﻿@model Seed
+
+<h2>@Model.Name</h2>
+
+<div class="thumbnail">
+    <img alt="@Model.Name" src="~/images/@(Model.Type).jpg" />
+    <div class="caption-full">
+        <h3 class="fa-pull-right">@Model.Price SEK</h3>
+        <h3>@Model.Name</h3>
+        <h5 class="h5-italic">(@Model.LatinName)</h5>
+        <h5><strong>@Model.Type</strong></h5>
+        <h5 class="fa-pull-right">Årighet: @Model.Annuality</h5>
+        <h5>Botanisk familj: @Model.BotanicalFamily</h5>
+        <h5 class="fa-pull-right">Höjd: @Model.HeightCm cm</h5>
+        <h5>Utvecklingstid: @Model.DaysToDevelop dagar</h5>
+        <p>@Model.Description</p>
+        @if (User.Identity.IsAuthenticated)
+        {
+            @*<span class="float-right">@Html.ActionLink("Köp", "AddToCart", "Seeds", new { id = item.SeedId }, new { @class = "btn btn-success" })</span>*@
+            <span class="float-right"><button class="btn btn-success" onclick="AddToCart('@Model.SeedId')">Lägg i kundvagn</button></span>
+        }
+        <span class="float-left"><button class="btn btn-success" onclick="history.go(-1); return false;">Tillbaka</button></span>
+    </div>
+</div>
