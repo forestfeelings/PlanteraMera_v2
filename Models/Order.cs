@@ -19,6 +19,7 @@ namespace PlanteraMera_v2.Models
         public List<OrderRow> OrderRows { get; set; }
         public Guid UserId { get; set; }
         public decimal TotalPrice { get; set; }
+        public Guid SeedId { get; set; }
     }
 
     public class OrderRow

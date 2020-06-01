@@ -15,14 +15,16 @@ namespace PlanteraMera_v2.Controllers
     {
         private readonly ISeedService _seedService;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IOrderService _orderService;
 
         private const string sessionKeyCart = "_cart";
         private const string sessionKeyUserId = "_userId";
 
-        public CartController(ISeedService seedService, UserManager<ApplicationUser> userManager)
+        public CartController(ISeedService seedService, UserManager<ApplicationUser> userManager, IOrderService orderService)
         {
             _seedService = seedService;
             _userManager = userManager;
+            _orderService = orderService;
         }
 
         /* Kollar om sessionen är aktiv och om det finns varor tillagda i sessionen */
@@ -56,21 +58,40 @@ namespace PlanteraMera_v2.Controllers
         {
             OrderViewModel vm = new OrderViewModel();
 
+            var seedList = cart.Seeds.Select(x => x.Seed).ToList();
+
+            //var orderRowList = cart.Seeds.Select(cartItem => new OrderRow(cartItem)).ToList();
+
+            var orderId = Guid.NewGuid();
+
             Order order = new Order();
 
-            order.TotalPrice = cart.TotalPrice;
-            order.OrderDate = DateTime.Now;
-            order.UserId = Guid.Parse(_userManager.GetUserId(User));
+            foreach (var seed in seedList)
+            {
+                order.OrderId = orderId;
+                order.SeedId = seed.SeedId;
+                order.UserId = Guid.Parse(_userManager.GetUserId(User));
+                order.OrderDate = DateTime.Now;
+            }
 
-            order.OrderRows = cart.Seeds.Select(cartItem => new OrderRow(cartItem)).ToList();
+            var orderIsPlaced = await _orderService.PlaceOrder(order);
 
-            vm.Order = order;
+            if (orderIsPlaced)
+            {
+                vm.Order = order;
+                vm.Order.TotalPrice = cart.TotalPrice;
+                vm.Order.OrderRows = cart.Seeds.Select(cartItem => new OrderRow(cartItem)).ToList();
 
-            var user = await _userManager.GetUserAsync(User);
+                var user = await _userManager.GetUserAsync(User);
 
-            vm.User = user;
+                vm.User = user;
 
-            return View("OrderSuccess", vm);
+                return View("OrderSuccess", vm);
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
     }
 }

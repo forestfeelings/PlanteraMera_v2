@@ -23,7 +23,7 @@ namespace PlanteraMera_v2.Services
             _clientFactory = clientFactory;
             _config = config;
 
-            apiRootUrl = _config.GetValue(typeof(string), "SeedApiRoot").ToString();
+            apiRootUrl = _config.GetValue(typeof(string), "seedApiRoot").ToString();
         }
 
         /// <summary>

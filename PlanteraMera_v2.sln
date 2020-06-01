@@ -6,6 +6,7 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlanteraMera_v2", "PlanteraMera_v2.csproj", "{F18C5C49-8F1E-4E4A-BAE1-69D3569FA089}"
 	ProjectSection(ProjectDependencies) = postProject
 		{661F105C-AC9E-4DCE-9727-AD947AB4EB52} = {661F105C-AC9E-4DCE-9727-AD947AB4EB52}
+		{B72F5BA9-9572-42AF-9FB3-2B16EF655AC6} = {B72F5BA9-9572-42AF-9FB3-2B16EF655AC6}
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeedsService", "..\SeedsService\SeedsService.csproj", "{661F105C-AC9E-4DCE-9727-AD947AB4EB52}"

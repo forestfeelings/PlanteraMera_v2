@@ -58,6 +58,7 @@ namespace PlanteraMera_v2
             services.AddRazorPages();
             services.AddHttpClient();
             services.AddTransient<ISeedService, SeedService>();
+            services.AddScoped<IOrderService, OrderService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
