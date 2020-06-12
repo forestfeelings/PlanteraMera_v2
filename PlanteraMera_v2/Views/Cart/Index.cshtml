@@ -1,56 +1,16 @@
 ﻿@model CartViewModel
-
-@*  Kollar om det finns varor i sessions och att 
-    sessionen inte har gått ut, dvs att det inte 
+@*  Kollar om det finns varor i sessions och att
+    sessionen inte har gått ut, dvs att det inte
     finns ett meddelande från controllern,
     och visar då varorna *@
+
+@{
+    ViewData["Title"] = "Kundvagnen";
+}
 
 <h2>Din kundvagn</h2>
 <h4>Här är de frön du lagt till i din kundvagn.</h4>
 
-@if (Model.Seeds != null && Model.TotalPrice > 0 && ViewBag.Message == null)
-{
-    <form method="post" asp-action="PlaceOrder">
-        <table class="table table-bordered table-striped">
-            <thead>
-                <tr>
-                    <th>Antal valda</th>
-                    <th>Frö</th>
-                    <th class="text-right">Pris</th>
-                </tr>
-            </thead>
-            <tbody>
-                @for (int i = 0; i < Model.Seeds.Count; i++)
-                {
-                    <tr>
-                        <td class="text-center">
-                            @Html.DisplayFor(modelItem => modelItem.Seeds[i].Amount)
-                            @Html.HiddenFor(modelItem => modelItem.Seeds[i].Amount)
-                        </td>
-                        <td class="text-left">
-                            @Html.DisplayFor(modelItem => modelItem.Seeds[i].Seed.Name)
-                            @Html.HiddenFor(modelItem => modelItem.Seeds[i].Seed.Name)
-                        </td>
-                        <td class="text-right">
-                            @Html.DisplayFor(modelItem => modelItem.Seeds[i].Seed.Price)
-                            @Html.HiddenFor(modelItem => modelItem.Seeds[i].Seed.Price)
-                        </td>
-                    </tr>
-                }
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td colspan="3" class="text-right">Totalsumma:</td>
-                    <td class="text-right">
-                        @Model.TotalPrice SEK
-                    </td>
-                    <td><input type="submit" class="float-right btn btn-success" value="Beställ" /></td>
-                </tr>
-            </tfoot>
-            @Html.HiddenFor(modelItem => modelItem.TotalPrice)
-        </table>
-    </form>
-}
 
 @if (ViewBag.Message != null)
 {
@@ -65,4 +25,101 @@
     <p>Din kundvagn är tom.</p>
 }
 
+@if (Model.User.StreetAddress == null || Model.User.PostalCode == null || Model.User.City == null)
+{
+    <div class="alert alert-warning" role="alert">
+        <p>Du behöver fylla i dina adressuppgifter. Det kan du göra <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">här</a>!</p>
+    </div>
 
+    @if (Model.Seeds != null && Model.TotalPrice > 0 && ViewBag.Message == null)
+    {
+        <form method="post" asp-action="PlaceOrder">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Antal valda</th>
+                        <th>Frö</th>
+                        <th class="text-right">Pris</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.Seeds.Count; i++)
+                    {
+                        <tr>
+                            <td class="text-center">
+                                @Html.DisplayFor(modelItem => modelItem.Seeds[i].Amount)
+                                @Html.HiddenFor(modelItem => modelItem.Seeds[i].Amount)
+                            </td>
+                            <td class="text-left">
+                                @Html.DisplayFor(modelItem => modelItem.Seeds[i].Seed.Name)
+                                @Html.HiddenFor(modelItem => modelItem.Seeds[i].Seed.Name)
+                            </td>
+                            <td class="text-right">
+                                @Html.DisplayFor(modelItem => modelItem.Seeds[i].Seed.Price)
+                                @Html.HiddenFor(modelItem => modelItem.Seeds[i].Seed.Price)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="2" class="text-right">Totalsumma:</td>
+                        <td class="text-right">
+                            @Model.TotalPrice SEK
+                        </td>
+                    </tr>
+                </tfoot>
+                @Html.HiddenFor(modelItem => modelItem.TotalPrice)
+            </table>
+        </form>
+    }
+
+}
+else
+{
+    @if (Model.Seeds != null && Model.TotalPrice > 0 && ViewBag.Message == null)
+    {
+        <form method="post" asp-action="PlaceOrder">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Antal valda</th>
+                        <th>Frö</th>
+                        <th class="text-right">Pris</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.Seeds.Count; i++)
+                    {
+                        <tr>
+                            <td class="text-center">
+                                @Html.DisplayFor(modelItem => modelItem.Seeds[i].Amount)
+                                @Html.HiddenFor(modelItem => modelItem.Seeds[i].Amount)
+                            </td>
+                            <td class="text-left">
+                                @Html.DisplayFor(modelItem => modelItem.Seeds[i].Seed.Name)
+                                @Html.HiddenFor(modelItem => modelItem.Seeds[i].Seed.Name)
+                            </td>
+                            <td class="text-right">
+                                @Html.DisplayFor(modelItem => modelItem.Seeds[i].Seed.Price)
+                                @Html.HiddenFor(modelItem => modelItem.Seeds[i].Seed.Price)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3" class="text-right">Totalsumma:</td>
+                        <td class="text-right">
+                            @Model.TotalPrice SEK
+                        </td>
+                        <td>
+                            <input type="submit" class="float-right btn btn-success" value="Beställ" />
+                        </td>
+                    </tr>
+                </tfoot>
+                @Html.HiddenFor(modelItem => modelItem.TotalPrice)
+            </table>
+        </form>
+    }
+}

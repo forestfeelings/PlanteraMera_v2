@@ -12,10 +12,12 @@ namespace PlanteraMera_v2.ViewModels
         public CartViewModel()
         {
             Seeds = new List<CartItem>();
+            User = new ApplicationUser();
         }
 
         public decimal TotalPrice { get; set; }
         public List<CartItem> Seeds { get; set; }
+        public ApplicationUser User { get; set; }
     }
 
     public class CartItem

@@ -35,6 +35,10 @@ namespace PlanteraMera_v2.Controllers
 
             CartViewModel vm = new CartViewModel();
 
+            var user = await _userManager.GetUserAsync(User);
+
+            vm.User = user;
+
             if (cartUserId == null || cartUserId == Guid.Empty)
             {
                 ViewBag.Message = "Sessionen har gått ut!";
@@ -43,7 +47,7 @@ namespace PlanteraMera_v2.Controllers
 
             var cart = HttpContext.Session.Get<List<CartItem>>(sessionKeyCart);
             var seeds = await _seedService.GetAll();
-
+            
             vm.Seeds = cart;
 
             vm.TotalPrice = vm.Seeds.Sum(s => s.Seed.Price * s.Amount);
