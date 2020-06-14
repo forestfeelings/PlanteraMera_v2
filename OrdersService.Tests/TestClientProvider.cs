@@ -34,6 +34,7 @@ namespace OrdersService.Tests
             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"))));
             // Använder Startup.cs från test-target projektet
             webHostBuilder.UseStartup<Startup>();
+            webHostBuilder.UseConfiguration(configuration);
 
             Server = new TestServer(webHostBuilder);
 

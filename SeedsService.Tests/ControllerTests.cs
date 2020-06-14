@@ -26,7 +26,7 @@ namespace SeedsService.Tests
         {
             using (var client = new TestClientProvider().Client)
             {
-                client.DefaultRequestHeaders.Add("ApiKey", "SuperHemligaApiNyckeln");
+                client.DefaultRequestHeaders.Add("ApiKey", "SecretSeedKey");
                 var response = await client.GetAsync("/api/seed/getall");
 
                 Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -39,6 +39,7 @@ namespace SeedsService.Tests
         {
             using (var client = new TestClientProvider().Client)
             {
+                client.DefaultRequestHeaders.Add("ApiKey", "SecretSeedKey");
                 var response = await client.GetAsync($"/api/seed/getbyid?id{Guid.Empty}");
 
                 Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
@@ -51,6 +52,7 @@ namespace SeedsService.Tests
         {
             using (var client = new TestClientProvider().Client)
             {
+                client.DefaultRequestHeaders.Add("ApiKey", "SecretSeedKey");
                 var seedResponse = await client.GetAsync($"/api/seed/getbyid?id={_fixture.seed.SeedId}");
 
                 using (var responseStream = await seedResponse.Content.ReadAsStreamAsync())
@@ -69,6 +71,7 @@ namespace SeedsService.Tests
         {
             using (var client = new TestClientProvider().Client)
             {
+                client.DefaultRequestHeaders.Add("ApiKey", "SecretSeedKey");
                 Guid seedId = Guid.Empty;
                 var payload = JsonSerializer.Serialize(
                     new Seed()
@@ -116,6 +119,7 @@ namespace SeedsService.Tests
         {
             using (var client = new TestClientProvider().Client)
             {
+                client.DefaultRequestHeaders.Add("ApiKey", "SecretSeedKey");
                 Guid seedId = Guid.Empty;
                 var payload = JsonSerializer.Serialize(
                     new Seed()

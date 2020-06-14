@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OrdersService.Filters;
 using OrdersService.Models;
 using OrdersService.Repositories;
 using System;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace OrdersService.Controllers
 {
+    [ApiKeyAuth]
     [Route("api/[controller]/[action]")]
     [ApiController]
     public class OrderController : ControllerBase
@@ -48,6 +50,13 @@ namespace OrdersService.Controllers
             {
                 return NotFound(id);
             }
+        }
+
+        [HttpGet]
+
+        public ActionResult<string> Secret()
+        {
+            return Ok("Detta är ännu en hemlis...");
         }
     }
 }

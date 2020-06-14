@@ -37,6 +37,9 @@ namespace PlanteraMera_v2.Services
             request.Headers.Add("User-Agent", "PlanteraMera_v2");
             request.Content = new StringContent(postJson, Encoding.UTF8, "application/json");
 
+            var seedApiKey = _config.GetValue<string>("ApiKeys:OrderApiKey");
+            request.Headers.Add("ApiKey", seedApiKey);
+
             var response = await client.SendAsync(request);
 
             return response.IsSuccessStatusCode;

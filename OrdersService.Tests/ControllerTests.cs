@@ -19,6 +19,7 @@ namespace OrdersService.Tests
         {
             using (var client = new TestClientProvider().Client)
             {
+                client.DefaultRequestHeaders.Add("ApiKey", "SecretOrderKey");
                 int id = 0;
                 var payload = JsonSerializer.Serialize(
                     new Order()
@@ -28,6 +29,7 @@ namespace OrdersService.Tests
                         OrderId = Guid.Parse("637cd533-23eb-4922-8778-3985b514f125")
                     }
                     );
+
                 HttpContent content = new StringContent(payload, Encoding.UTF8, "application/json");
 
                 var response = await client.PostAsync($"/api/order/create", content);
@@ -60,6 +62,7 @@ namespace OrdersService.Tests
         {
             using (var client = new TestClientProvider().Client)
             {
+                client.DefaultRequestHeaders.Add("ApiKey", "SecretOrderKey");
                 int id = 0;
                 var payload = JsonSerializer.Serialize(
                     new Order()

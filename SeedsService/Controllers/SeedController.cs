@@ -10,6 +10,7 @@ using SeedsService.Repositories;
 
 namespace SeedsService.Controllers
 {
+    
     [Route("api/[controller]/[action]")]
     [ApiController]
     public class SeedController : ControllerBase
@@ -21,6 +22,7 @@ namespace SeedsService.Controllers
             _seedRepository = seedRepository;
         }
 
+        [ApiKeyAuth]
         [HttpGet]
 
         public ActionResult<Seed> GetById(Guid id)
@@ -44,6 +46,7 @@ namespace SeedsService.Controllers
             return Ok(seeds);
         }
 
+        [ApiKeyAuth]
         [HttpPost]
 
         public ActionResult<Seed> Create([FromBody] Seed seed)
@@ -57,7 +60,7 @@ namespace SeedsService.Controllers
 
             return Ok(createdSeed);
         }
-
+        [ApiKeyAuth]
         [HttpDelete]
 
         public ActionResult<Guid> Delete(Guid id)
